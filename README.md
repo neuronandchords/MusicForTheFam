@@ -27,7 +27,7 @@ Not a REST API, but achieved through Redis, Celery Beat and Celery Worker. Expla
 # Methodology 
 I have used Django Rest Framework to server RESTful APIs which are then consumed by Vue.js Frontend. The database is hosted externally over AWS EC2 instance and is connected with the Django backend using psycopg2. The Async Youtube API has been designed using Redis as Broker and Celery as a worker. The Celery beat schedules a get_youtube_videos task every 60seconds which is recieved and executed by the Celery Worker and the data keeps on getting fetched and the database keeps on updating till the max_interval reaches or youtube daily quota expires. Whereas the GET API and SEARCH API are server using DRF Views.
 
-Taking this to a level forward have hosted the backend at an t2.micro EC2 instance (free tier eligible), supervised by Gunicorn which keeps the backend server running and alive. The PostGresSQL server is hosted over here too. NGINX has been configured to handle reverse proxies. The celery beat and celery worker are 
+Taking this to a level forward have hosted the backend at an t2.micro EC2 instance (free tier eligible), supervised by Gunicorn which keeps the backend server running and alive. The PostGresSQL server is hosted over here too. NGINX has been configured to handle reverse proxies. The celery beat and celery worker could have been supervised too but then the daily quota would expire before you could even test it, so I didn't.
 
 # Steps to test GET and SEARCH API:
 1) Clone the repository
