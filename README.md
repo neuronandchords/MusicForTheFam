@@ -22,6 +22,9 @@ POST http://localhost:8000/search (Headers:"Content-Type":"application/json", bo
 
 3) ASYNC YOUTUBE API (hits every 60 seconds to fetch latest videos)
 Not a REST API, but achieved through Redis, Celery Beat and Celery Worker. Explained below :) 
+
+4) DASHBOARD 
+  Have created the Dashboard using Vue.js and hosted over S3. Can be accessed here -
   
 # Methodology 
 I have used Django Rest Framework to server RESTful APIs which are then consumed by Vue.js Frontend. The database is hosted externally over AWS EC2 instance and is connected with the Django backend using psycopg2. The Async Youtube API has been designed using Redis as Broker and Celery as a worker. The Celery beat schedules a get_youtube_videos task every 60seconds which is recieved and executed by the Celery Worker and the data keeps on getting fetched and the database keeps on updating till the max_interval reaches or youtube daily quota expires. Whereas the GET API and SEARCH API are server using DRF Views.
@@ -49,3 +52,8 @@ Taking this to a level forward have hosted the backend at an t2.micro EC2 instan
 9) celery -A core worker -P gevent (for windows)
 10) celery -A core worker (should work for Mac, have only tested for Windows. The change because Windows doesn't support Celery 4.x and above)
 11) celery -A core beat -l info --max-interval <time_in_seconds_for_which_you_want_to_keep_hitting_every_1_minute>
+  
+# Bonus Points Covered
+1) Couldn't achieve this, because have already exhausted all the Credit Card in the house over free trials. This API KEY is borrowed from a friend :p 
+2) Done. Have created the Dashboard using Vue.js and hosted over S3. Can be accessed here -
+3) Done. Achieved using psycopg2 search vectors for a Full Text Search over keywords over traditional DRF filters.
