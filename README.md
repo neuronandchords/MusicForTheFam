@@ -19,9 +19,8 @@ GET http://localhost:8000/get_all_videos?page=1 (localhost)
 
 2) SEARCH API (search for title and description containing search keywords)
 POST http://localhost:8000/search (Headers:"Content-Type":"application/json", body:{'search':'query'}) (localhost)
-<IP>
-  
-3)ASYNC YOUTUBE API (hits every 60 seconds to fetch latest videos)
+
+3) ASYNC YOUTUBE API (hits every 60 seconds to fetch latest videos)
 Not a REST API, but achieved through Redis, Celery Beat and Celery Worker. Explained below :) 
   
 # Methodology 
