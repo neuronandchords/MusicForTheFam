@@ -14,12 +14,10 @@ Search Query Used: Official Music
 
 # Endpoints
 1) GET API (get all stored videos in the database sorted in reverse chronological order by publishedAt)
-<br/>
 GET http://localhost:8000/get_all_videos?page=1 (localhost)
 <IP>
 
 2) SEARCH API (search for title and description containing search keywords)
-<br/>
 POST http://localhost:8000/search (Headers:"Content-Type":"application/json", body:{'search':'query'}) (localhost)
 <IP>
   
