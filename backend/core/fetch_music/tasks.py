@@ -20,7 +20,7 @@ from datetime import timedelta
     ignore_result=True
 )
 def get_youtube_videos():
-    url = 'https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyAhiFH91JciYBdCT_U8A9hQ26bJyShVK3Q&type=video&q=official%20music&maxResults=100&order=date'
+    url = 'https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyAhiFH91JciYBdCT_U8A9hQ26bJyShVK3Q&type=video&q=official%20music&maxResults=100&order=date&publishedAfter=2021-05-23T00:00:00Z'
     r = requests.get(url, headers={'Content-Type':      
         'application/json'})
     response= r.json()
