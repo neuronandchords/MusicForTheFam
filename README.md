@@ -21,7 +21,7 @@ GET http://13.234.111.219:8000/get_all_videos?page=1 (AWS)
 POST http://localhost:8000/search (Headers:"Content-Type":"application/json", body:{'search':'query'}) (localhost)
 POST http://13.234.111.219:8000/search (Headers:"Content-Type":"application/json", body:{'search':'query'}) (AWS)
 
-3) ASYNC YOUTUBE API (hits every 60 seconds to fetch latest videos)
+3) ASYNC YOUTUBE API (hits every 30 seconds to fetch latest videos)
 Not a REST API, but achieved through Redis, Celery Beat and Celery Worker. Explained below :) 
 
 4) DASHBOARD 
