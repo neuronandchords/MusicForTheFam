@@ -4,9 +4,9 @@ from django.utils.text import slugify
 
 class Videos(models.Model):
     # Two character identifer for country (us, pk, in, etc.)
-    video_id = models.CharField(max_length=10, primary_key=True)
-    title = models.CharField(max_length=100, unique=True)
-    description = models.CharField(max_length=100,default="Official Music")
+    video_id = models.CharField(max_length=50,primary_key=True)
+    title = models.CharField(max_length=500)
+    description = models.CharField(max_length=500,default="Official Music")
     published_at = models.DateTimeField()
     thumbnail= models.URLField(default='https://upload.wikimedia.org/wikipedia/commons/3/35/Simple_Music.svg')
 

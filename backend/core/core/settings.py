@@ -25,7 +25,7 @@ SECRET_KEY = '_1rqac1cu-cos#p)&rd7c84oxlk5yv3g9^1qt26bipzl3x()-m'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'fetch_music',
     'rest_framework',
-    'corsheaders'
+    'corsheaders',
+    'django.contrib.postgres',
 ]
 
 MIDDLEWARE = [
@@ -79,8 +80,13 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'famtube',
+        'USER': 'ubuntu',
+        'PASSWORD': 'ubuntu',
+        'HOST': '13.234.111.219',
+        'PORT': '5432',
+        'ATOMIC_REQUESTS': True,
     }
 }
 

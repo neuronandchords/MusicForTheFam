@@ -9,6 +9,8 @@ from .models import Videos
 from .serializers import SearchSerializer
 from rest_framework.pagination import PageNumberPagination
 from django.db.models import Q, ExpressionWrapper, BooleanField, Count
+from django.contrib.postgres.search import SearchQuery
+from django.contrib.postgres.search import SearchVector
 
 class MediumPagination(PageNumberPagination):
     page_size_query_param = 'page_size'
@@ -35,10 +37,11 @@ class SearchAPI(generics.ListCreateAPIView):
         search=request.data.get('search')
         if search:
             # expression = Q(title__icontains=search+" ") | Q(description__icontains=" "+search)
-            queryset=Videos.objects.all().filter(Q(title__icontains=search) | Q(description__icontains=search))
+            # queryset=Videos.objects.all()
             # is_match = ExpressionWrapper(expression, output_field=BooleanField())
             # queryset = queryset.annotate(my_field=is_match)
             # queryset = queryset.order_by('-publisd')
+            queryset=Videos.objects.annotate(search=SearchVector('title', 'description')).filter(search=search)
             res=queryset.values_list('video_id','title','description','published_at','thumbnail')
             return Response({"response":res})
         else:
@@ -51,8 +54,11 @@ class UpdateResultsOnce(generics.ListCreateAPIView):
         r = requests.get(url, headers={'Content-Type':      
             'application/json'})
         response= r.json()
+        res = []
         for item in response['items']:
             video = Videos(video_id=item['id']['videoId'], title=item['snippet']['title'],description=item['snippet']['description'],
                             published_at=item['snippet']['publishedAt'],thumbnail=item['snippet']['thumbnails']['medium']['url'])
             video.save()
-        return Response({"response":response})
+            queryset=Videos.objects.all().order_by('-published_at')
+            res=queryset.values_list('video_id','title','description','published_at','thumbnail')
+        return Response({"response":res})
